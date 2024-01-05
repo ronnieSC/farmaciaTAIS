@@ -1,0 +1,87 @@
+{% extends 'producto/heredame_user.html' %}
+{%block content %}
+{% load static %}
+
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Lista de Productos</title>
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="listing">
+
+<form method="POST" action=""  onsubmit="delete_selected_checkboxes();">{%csrf_token%}
+	<h1>Lista de Productos</h1>
+	<div>
+		<table border="1" width="100%" id="container_table">
+			<tr>
+				<th style="text-align:left">Nombre</th>
+				<th style="text-align:left">Descripción</th>
+				<th style="text-align:left">Proveedor</th>
+				<th style="text-align:left">Precio</th>
+				<th style="text-align:left">Cantidad</th>
+				<th style="text-align:left">Oferta</th>
+				<th style="text-align:left">Imagen</th>
+				<th style="text-align:left">Modificar</th>
+				<th style="text-align:left">¿Borrar?</th>
+			</tr>
+			{% for producto in productos %}
+			<tr>
+				<td ><span >
+					{{producto.nombre}}</span></td>
+				<td ><span >
+					{{producto.descripcion}}</span></td>
+				<td ><span >
+					{{producto.proveedor.razonsocial}}</span></td>
+				<td ><span >
+					{{producto.precio}}</span></td>
+				<td ><span >
+					{{producto.cantidad}}</span></td>
+				<td ><span >
+					<p align="center"><input type="checkbox"  name="" value="" disabled 
+					{% if producto.oferta == True %}
+						checked
+					{%endif%}></span></td>
+				<td ><span >
+					<img src="/{{producto.imagen.url}}" alt="producto" width="100" height="100"></span></td>
+				<td ><span >
+					<a href="{{producto.get_absolute_url}}">aqui</a></a></span></td>
+				<td ><p align="center"><input type="checkbox"  name="CHECKED" value="{{producto.id}}"></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<a href="/">regresar al indice</a><br>
+		<br>
+		<table class="simplealign">
+			<tr>
+				<td><input type="submit" value="Borrar" name="B1" class="buttonsingle" ></td>
+				<td><input type="reset" value="Resetear" name="B2" class="buttonsingle" ></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<p>
+
+</div>
+<script>
+	function delete_selected_checkboxes(){ 
+		if (document.getElementById("container_table").rows.length==1){
+			return alert("lista vacia");
+		}
+		else{
+			return confirm('¿Esta seguro de borrar los elementos seleccionados?');
+		}
+		
+		}
+</script>
+</body>
+
+</html>
+{% endblock %}

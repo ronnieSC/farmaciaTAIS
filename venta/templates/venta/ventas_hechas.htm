@@ -1,0 +1,79 @@
+{% extends 'home/heredame_user.html' %}
+{%block content %}
+{% load static %}
+
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Lista de Ventas</title>
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="listing">
+<form method="POST" action="" onsubmit="return delete_selected_checkboxes();">{%csrf_token%}
+	<h1>Lista de Ventas</h1>
+	{%for message in messages %}
+				<h3>{{message}}</h3>
+			{% endfor %}
+	<div ><table border="1" width="100%" id="container_table">
+			<tr>
+				<th style="text-align:left">Cliente</th>
+				<th style="text-align:left">Vendedor</th>
+				<th style="text-align:left">Descripcion</th>
+				<th style="text-align:left">total</th>
+				<th style="text-align:left">Fecha</th>
+				<th style="text-align:left">Ver</th>
+				<th style="text-align:left">¿Borrar?</th>
+			</tr>
+			{% for venta in ventas %}
+			<tr>
+				<td ><span>
+					{{venta.cliente.nombres}} {{venta.cliente.apellidos}}</span></td>
+				<td ><span>
+					{{venta.vendedor}}</span></td>
+				<td ><span>
+					<table >{{venta.detalles|safe}}</table>
+					</span></td>
+				<td ><span>
+					{{venta.total}}</span></td>
+				<td ><span>
+					{{venta.fecha}}</span></td>
+				<td ><a href="{{venta.get_absolute_url}}">aqui</a></a>
+				</td></span></td>
+				<td ><p align="center"><input type="checkbox"  name="CHECKED" value="{{venta.id}}"></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<a href="/">regresar al indice</a><br><br>	
+	</div>
+	<table  class="simplealign">
+			<tr>
+				<td><input type="submit" value="Borrar" name="B1"  class="buttonsingle" ></td>
+				<td><input type="reset" value="Resetear" name="B2"  class="buttonsingle" ></td>
+			</tr>
+		</table>
+</form>
+<p>
+
+</div>
+<script>
+	function delete_selected_checkboxes(){ 
+		if (document.getElementById("container_table").rows.length==1){
+			return alert("lista vacia");
+		}
+		else{
+			return confirm('¿Esta seguro de borrar los elementos seleccionados?');
+		}
+		
+		}
+</script>
+</body>
+
+</html>
+{% endblock %}

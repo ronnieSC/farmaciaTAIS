@@ -1,0 +1,177 @@
+{% load static %}
+{% static "images" as baseURL%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Catalogo de mi Pharmia</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'shop/fonts/icomoon/style.css' %}">
+
+  <link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'shop/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'shop/css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'shop/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'shop/css/owl.theme.default.min.css' %}">
+
+
+  <link rel="stylesheet" href="{% static 'shop/css/aos.css' %}">
+
+  <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="/" class="js-logo-clone">Pharmia</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="/">Inicio</a></li>
+                <li class="active"><a href="/shop">Tienda</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="logo">
+            <div class="site-logo">
+              {% if user.is_authenticated %}
+              <p class="text-dark font-weight-bold">Hola, {{user.username}}</p>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="/">Inicio</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Tienda</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        
+        <div class="row">
+          {% for Producto in Productos %}
+          <div class="col-sm-6 col-lg-4 text-center item mb-4">
+            {% if Producto.oferta %}
+            <span class="tag">Oferta</span>
+            {% endif %}
+            <a href="/shop"> <img src="../{{Producto.imagen.url}}" alt="Image"></a>
+            <h3 class="text-dark"><a href="/shop">{{Producto.nombre}}</a></h3>
+            <p class="price">S/.{{Producto.precio}}</p>
+          </div>
+          {% endfor %}
+        </div>  
+      </div>
+    </div>
+
+    
+    <div class="site-section bg-secondary bg-image" style="background-image: url('{% static 'shop/images/bg_2.jpg' %}');">
+      <div class="container">
+        <div class="row align-items-stretch">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <a href="#" class="banner-1 h-100 d-flex" style="background-image: url('{% static 'shop/images/bg_1.jpg' %}');">
+              <div class="banner-1-inner align-self-center">
+                <h2>Los productos Pharma</h2>
+                <p>Los productos Pharma provienen de los más prestigiosos laboratorios a nivel mundial. 15 años de servicio nos respalda.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <a href="#" class="banner-1 h-100 d-flex" style="background-image: url('{% static 'shop/images/bg_2.jpg' %}');">
+              <div class="banner-1-inner ml-auto  align-self-center">
+                <h2>La opinion de los expertos</h2>
+                <p>Visite a su médico una vez por mes. No descuide su salud.
+                 </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+
+            <div class="block-7">
+              <h3 class="footer-heading mb-4">About Us</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
+                sed dolorum excepturi iure eaque, aut unde.</p>
+            </div>
+
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <ul class="list-unstyled">
+                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
+                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                <li class="email">emailaddress@domain.com</li>
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+              with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
+                class="text-primary">Colorlib</a>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{% static 'shop/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'shop/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'shop/js/popper.min.js' %}"></script>
+  <script src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'shop/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'shop/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'shop/js/aos.js' %}"></script>
+
+  <script src="{% static 'shop/js/main.js' %}"></script>
+
+</body>
+
+</html>

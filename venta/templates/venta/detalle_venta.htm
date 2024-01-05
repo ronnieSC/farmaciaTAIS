@@ -1,0 +1,88 @@
+{% extends 'venta/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Detalle de Venta</title>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script>
+	if ( window.history.replaceState ) {
+	window.history.replaceState( null, null, window.location.href );
+}
+</script>
+</head>
+
+<body>
+
+<div  class="listing">
+	<form method="POST" action="">{%csrf_token%}
+		<div>
+			<p ><h2 >Detalle de Venta</h2></p>
+			<table border="0" width="100%">
+				<tr>
+					<td>Cliente</td>
+					<td>
+						<input type="text" name="txtfullnames" value="{{form.cliente.nombres}} {{form.cliente.apellidos}}" readonly="readonly">
+					</td>
+				</tr>
+				<tr>
+					<td>DNI</td>
+					<td>
+						<input type="text" name="txtdni" value="{{form.cliente.DNI}}" readonly="readonly">
+					</td>
+				</tr>
+				<tr>
+					<td>Dirección</td>
+					<td><input type="text" name="txtdireccion" value="{{form.cliente.direccion}}" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td><input type="text" name="txtemail" value="{{form.cliente.email}}" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td>Teléfono</td>
+					<td><input type="text" name="txttelefono" value="{{form.cliente.telefono}}" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td><h1><br>Productos</h1></td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;
+					<table border="1" width="100%">
+						{{form.detalles|safe}}
+					</table>
+					<br>
+					<table border="0" width="100%">
+						<tr>
+							<td>Total S/.:</td>
+							<td><input type="text" value = "{{form.total}}" name="total" readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td>Fecha:</td>
+							<td><input type="text" value = "{{form.fecha}}" name="fecha" readonly="readonly"></td>
+						</tr>
+					</table>
+					<br>
+					<br>
+						<a href="/">regresar al indice</a>
+					<br>
+					<br>
+						<a href="{{form.get_absolute_url}}download_pdf/">Ver como PDF</a>
+					<br>
+					<br>
+						<a href="{{form.get_absolute_url}}send_email/">Enviar por E-mail</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</form>
+</div>
+
+</body>
+
+</html>
+{% endblock %}

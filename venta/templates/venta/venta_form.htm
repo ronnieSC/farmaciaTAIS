@@ -1,0 +1,119 @@
+{% extends 'venta/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<html>
+
+<head>
+<script src="/static/venta/functions.js"></script>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Formulario de Ventas</title>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body onload="OnloadDoc()">
+
+<div  class="listing">
+	<form method="POST" id="mainform" action="">{%csrf_token%}
+		<div>
+			<p ><h2 >Formulario de Ventas</h2></p>
+			{%for message in messages %}
+				<h3>{{message}}</h3>
+			{% endfor %}
+			<table border="0" width="100%">
+				<tr>
+					<td>Cliente</td>
+					<td>
+						<select name="cliente" id="cli"  onchange="fill_by_select(id,'dni');">
+							<option selected></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>DNI</td>
+					<td>
+						<select name="DNI" id="dni" onchange="fill_by_select(id,'cli');">
+							<option selected></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Dirección</td>
+					<td><input type="text" name="txtdireccion" id="dir"  value="" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td><input type="text" name="txtemail" id="email"  value="" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td>Teléfono</td>
+					<td><input type="text" name="txttelefono" id="telefono"  value="0" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td><h1><br>Productos</h1></td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;
+					<table border="1" width="100%" bordercolorlight="#FFFFFF" bordercolordark="#000000" bgcolor="#FFFFFF">
+					<tbody id="tableToModify">
+						<tr>
+							<th style="text-align:left">Nombre</th>
+							<th style="text-align:left">Descripción</th>
+							<th style="text-align:left">Cantidad</th>
+							<th style="text-align:left">Precio</th>
+						</tr>
+						<tr id="rowToClone" class="rowclass">
+							<td width=60>
+								<select size="1" name="cboxproducto" onchange="fill_by_select_prod(id);" id="new_product_0">
+									<option selected></option>
+								</select>
+							</td>
+							<td width="50">
+								<input type="text" name="txtdescripcion" size="10" id="new_descripcion_0" value="" readonly="readonly">
+							</td>
+							<td width="47">
+								<select size="1" name="cboxcantidad" class="calcular" onchange="get_price(id);" id="new_cantidad_0">
+									<option selected>0</option>
+								</select>
+							</td>
+							<td width="20">
+								<input type="text" name="txtprecio" size="5" id="new_precio_0" class="precios_a_sumar" value = "0" readonly="readonly">
+							</td>
+						</tr>
+					</tbody>
+					</table>
+					<p><input type="button" value="añadir" onclick="cloneRow()" name="add"   class="buttonsingle"></p>
+					<br><table border="0" width="100%">
+						<tr>
+							<td>Total:</td>
+							<td><input type="text" value = "0" name="total" id="total" readonly="readonly"></td>
+						</tr>
+					</table>
+					<br>
+					<table style="margin-left:auto;margin-right:auto;">
+						<tr>
+							<td><input type="submit" value="Grabar" name="B1"   class="buttonsingle" ></td>
+							<td><input type="reset" onclick="resetRows()" value="Resetear" name="B2"   class="buttonsingle"></td>
+						</tr>
+					</table>
+					<br>
+		<a href="/">regresar al indice</a>
+		<br><br>
+					</td>
+					</tr>
+			</table>
+		</div>
+		
+	</form>
+</div>
+<script>
+	if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    document.getElementById("mainform").reset();
+  } else {
+    console.info( "This page is not reloaded");
+  }
+</script>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'cliente/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Detalle de Cliente
+        </title>
+        <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    </head>
+    <body>
+        <div class="listard">
+            <h1>Detalle de Cliente</h1>
+            <p>Nombres y Apellidos {{object.apellidos}} / {{object.nombres}}</p>
+            <p>Edad: {{object.edad}}.</p>
+            <p>Direccion: {{object.edad}}.</p>
+            <p>DNI: {{object.DNI}}.</p>
+            <p>Email: {{object.email}}.</p>
+            <p>Telefono: {{object.telefono}}.</p>
+            <br><a href="update/">modificar</a>
+            <br><a href="delete/">borrar</a>
+            <br><a href="../">regresar al listado</a>
+            <br><a href="/">regresar al indice</a>
+            <br>
+        </div>
+</body>
+</html>
+{% endblock %}

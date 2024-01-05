@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Detalle de Venta</title>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="listing">
+	<form method="POST" action="">{%csrf_token%}
+		<div>
+			<p ><h2 >Detalle de Venta</h2></p>
+			<table border="0" width="100%">
+				<tr>
+					<td>Cliente</td>
+					<td>
+					{{form.cliente.nombres}} {{form.cliente.apellidos}}
+					</td>
+				</tr>
+				<tr>
+					<td>DNI</td>
+					<td>{{form.cliente.DNI}}</td>
+				</tr>
+				<tr>
+					<td>Dirección</td>
+					<td>{{form.cliente.direccion}}</td>
+				</tr>
+				<tr>
+					<td>E-mail</td>
+					<td>{{form.cliente.email}}</td>
+				</tr>
+				<tr>
+					<td>Teléfono</td>
+					<td>{{form.cliente.telefono}}</td>
+				</tr>
+				<tr>
+					<td><h1><br>Productos</h1></td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;
+					<table border="1" width="100%">
+						{{form.detalles|safe}}
+					</table>
+					<br><br><br>
+					<table border="0" width="100%">
+						<tr>
+							<td>Total S/.:</td>
+							<td>{{form.total}}</td>
+						</tr>
+						<tr>
+							<td>Fecha:</td>
+							<td>{{form.fecha}}</td>
+						</tr>
+					</table>
+					<br>
+					<br>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</form>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{% extends 'cliente/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Detalle de Cliente
+        </title>
+        <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    </head>
+    <body>
+
+<div class="listard">
+<h1>Listado de Clientes</h1>
+{% for instance in object_list %}
+    <h5>
+        {{instance.id}} -
+        <a href='{{instance.get_absolute_url}}'>{{instance.nombres}}</a>
+    </h5>
+   
+{% endfor %}
+    <br><a href="/">regresar al indice</a><br><br>
+</div>
+</body>
+</html>
+{% endblock %}

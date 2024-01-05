@@ -1,0 +1,66 @@
+{% extends 'home/heredame_user.html' %}
+{%block content %}
+{% load static %}
+
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Lista de Testimonio</title>
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="listing">
+<form method="POST" action=""  onsubmit="return delete_selected_checkboxes();">{%csrf_token%}
+	<h1>Lista de Testimonio</h1>
+	<div ><table border="0" width="100%" id="container_table">
+			<tr>
+				<th style="text-align:left">Nombre</th>
+				<th style="text-align:left">Descripción</th>
+				<th style="text-align:left">Imagen</th>
+				<th style="text-align:left">¿Borrar?</th>
+			</tr>
+			{% for testimonio in testimonios %}
+			<tr>
+				<td ><span>
+					{{testimonio.nombre}}</span></td>
+				<td ><span>
+					{{testimonio.descripcion}}</span></td>
+				<td ><span>
+					<img src="/{{testimonio.imagen.url}}" alt="testimonio" width="100" height="100"></span></td>
+				<td ><p align="center"><input type="checkbox"  name="CHECKED" value="{{testimonio.id}}"></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<a href="/">regresar al indice</a><br><br>	
+	</div>
+	<table  class="simplealign">
+			<tr>
+				<td><input type="submit" value="Borrar" name="B1"  class="buttonsingle" ></td>
+				<td><input type="reset" value="Resetear" name="B2"  class="buttonsingle" ></td>
+			</tr>
+		</table>
+</form>
+<p>
+
+</div>
+<script>
+	function delete_selected_checkboxes(){ 
+		if (document.getElementById("container_table").rows.length==1){
+			return alert("lista vacia");
+		}
+		else{
+			return confirm('¿Esta seguro de borrar los elementos seleccionados?');
+		}
+		
+		}
+</script>
+</body>
+
+</html>
+{% endblock %}

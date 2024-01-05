@@ -1,0 +1,79 @@
+{% extends 'producto/heredame_user.html' %}
+{%block content %}
+{% load static %}
+
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Lista de Stickys</title>
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="listing">
+
+<form method="POST" action=""  onsubmit="return delete_selected_checkboxes();">{%csrf_token%}
+	<h1>Lista de Stickys</h1>
+	<div >
+		<table border="0" width="100%" id="container_table">
+			<tr>
+				<th style="text-align:left">Titulo</th>
+				<th style="text-align:left">Subtitulo</th>
+				<th style="text-align:left">Cuerpo</th>
+				<th style="text-align:left">Color</th>
+				<th style="text-align:left">¿Borrar?</th>
+			</tr>
+			{% for sticky in stickys %}
+			<tr>
+				<td ><span">
+					{{sticky.titulo}}</span></td>
+				<td ><span">
+					{{sticky.subtitulo}}</span></td>
+				<td ><span">
+					{{sticky.cuerpo}}</span></td>
+				<td >
+					{% if sticky.color|stringformat:"s" == "bg-primary" %}
+					<span style="background-color: #08f7f7">celeste</span>
+					{% elif sticky.color|stringformat:"s" == " " %}
+					<span style="background-color: #7bff00">verde</span>
+					{% elif sticky.color|stringformat:"s" == "bg-warning" %}
+					<span style="background-color: #ff5e00">naranja</span>
+					{% endif %}
+				</td>
+				<td ><p align="center"><input type="checkbox"  name="CHECKED" value="{{sticky.id}}"></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<a href="/">regresar al indice</a><br>
+		<br>
+		<table class="simplealign">
+			<tr>
+				<td><input type="submit" value="Borrar" name="B1" class="buttonsingle" ></td>
+				<td><input type="reset" value="Resetear" name="B2" class="buttonsingle" ></td>
+			</tr>
+		</table>	
+	</div>
+</form>
+<p>
+
+</div>
+<script>
+	function delete_selected_checkboxes(){ 
+		if (document.getElementById("container_table").rows.length==1){
+			return alert("lista vacia");
+		}
+		else{
+			return confirm('¿Esta seguro de borrar los elementos seleccionados?');
+		}
+		
+		}
+</script>
+</body>
+
+</html>
+{% endblock %}

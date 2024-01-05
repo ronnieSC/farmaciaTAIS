@@ -1,0 +1,42 @@
+{% extends 'cliente/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Añadir/Modificar Cliente</title>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="box">
+	<form method="POST" enctype="multipart/form-data">
+		<div >
+			<h1>Añadir/Modificar Cliente</h1>
+			{% csrf_token %}
+				<table>
+					{{form.as_table}}
+				</table>
+				<br>
+					<a href="/">regresar al indice</a><br>
+					<br>
+						<table class="simplealign">
+							<tr>
+								<td><input type="submit" value="Aceptar" name="B1" class="buttonsingletypical" ></td>
+								<td><input type="reset" value="Resetear" name="B2" class="buttonsingletypical" ></td>
+							</tr>
+						</table>
+				</div>
+		</div>
+	</form>
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}
+

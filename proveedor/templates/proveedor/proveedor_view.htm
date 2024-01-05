@@ -1,0 +1,80 @@
+{% extends 'proveedor/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Lista de Proveedores</title>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div  class="listing">
+<form method="POST" action=""  onsubmit="return delete_selected_checkboxes();">{%csrf_token%}
+	<h1>Lista de Proveedores</h1>
+	<div >
+		<table border="1" width="100%" id="container_table">
+			<tr>
+				<th style="text-align:left">Razón Social</th>
+				<th style="text-align:left">Dirección</th>
+				<th style="text-align:left">E-mail</th>
+				<th style="text-align:left">Telefono</th>
+				<th style="text-align:left">Representante</th>
+				<th style="text-align:left">Fecha de Contratación</th>
+				<th style="text-align:left">Modificar</th>
+				<th style="text-align:left">¿Borrar?</th>
+			</tr>
+			{% for provee in proveedor %}
+			<tr>
+				<td ><span>
+					{{provee.razonsocial}}</span></td>
+				<td ><span>
+					{{provee.direccion}}</span></td>
+				<td ><span>
+					<a href="mailto:{{provee.email}}">{{provee.email}}</a></a></span></td>
+				<td ><span>
+					{{provee.telefono}}</span></td>
+				<td ><span>
+					{{provee.representante}}</span></td>
+				<td ><span>
+					{{provee.fechacontratacion}}</span></td>
+				<td ><span>
+					<a href="{{provee.get_absolute_url}}">aqui</a></a></span></td>
+				<td ><p align="center"><input type="checkbox"  name="CHECKED" value="{{provee.id}}"></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<a href="/">regresar al indice</a>
+		<br><br>	
+	</div>
+	<table class="simplealign">
+			<tr>
+				<td><input type="submit" value="Borrar" name="B1"  class="buttonsingle"></td>
+				<td><input type="reset" value="Resetear" name="B2"  class="buttonsingle"></td>
+			</tr>
+	</table>
+	</div>
+	<p>&nbsp;</p>
+</form>
+<p>
+
+</div>
+<script>
+	function delete_selected_checkboxes(){ 
+		if (document.getElementById("container_table").rows.length==1){
+			return alert("lista vacia");
+		}
+		else{
+			return confirm('¿Esta seguro de borrar los elementos seleccionados?');
+		}
+		
+		}
+</script>
+</body>
+
+</html>
+{% endblock %}

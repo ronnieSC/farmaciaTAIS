@@ -1,0 +1,30 @@
+{% extends 'proveedor/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-pe">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Modificar Proveedor</title>
+
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+
+</head>
+<body>
+<form method='POST' enctype="multipart/form-data"> 
+	<div class="boxamp">
+	{% csrf_token %}
+    <h1>Modificar Proveedor</h1>
+        <table>
+            {{form.as_table}}
+		</table>
+		<br>
+	<a href="/">regresar al indice</a><br>
+	<br>
+	<input class="buttonbigform" type='submit' value ='Grabar' />
+	</div>
+</form>
+</body>
+</html>
+{% endblock %}

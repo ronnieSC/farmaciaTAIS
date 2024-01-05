@@ -1,0 +1,26 @@
+{% extends 'cliente/heredame_user.html' %}
+{%block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Detalle de Cliente
+        </title>
+        <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    </head>
+    <body>
+<div class="listard">
+<h1>Borrar Persona</h1>
+    <h2>{{object.apellidos}} / {{object.nombres}}</h2>
+    <form method="POST">{% csrf_token %}
+        <h5>
+            confirme que desea borrar a esta persona?
+        </h5><br>
+        <input type="submit" value="confirmar" class="buttonsingle simplealign"><br><br><br>
+        <br><a href="../../">regresar atras</a><br><br>
+    </form>
+</div>
+</body>
+</html>
+{% endblock %}
